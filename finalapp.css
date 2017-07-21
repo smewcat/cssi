@@ -20,6 +20,8 @@ body {background-image: url("back.jpg");}
   box-sizing: border-box;
   border: 5px solid #3E5655;
   outline: none;
+  font-size: 15pt;
+  font-family: "Patrick Hand";
 }
 
 .inputButton {
@@ -34,4 +36,10 @@ body {background-image: url("back.jpg");}
    text-align: center;
    text-decoration: none;
    outline: none;
+}
+
+.inputButton:hover {
+    background-color: #293939;
+    color: white;
+    cursor: pointer;;
 }
