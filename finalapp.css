@@ -1,0 +1,37 @@
+body {background-image: url("back.jpg");}
+
+/* Ingredient Entry Page */
+
+.title {
+  font-family: "Amatica SC";
+  font-size: 40pt;
+  background-color: white;
+}
+
+#ingredientInput {
+  display: inline;
+  font-family: "Patrick Hand";
+  font-size: 20pt;
+  padding-right: 10px;
+}
+
+.ingredientBox {
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 5px solid #3E5655;
+  outline: none;
+}
+
+.inputButton {
+  background-color: #3E5655;
+   border: 2px solid white;
+   color: white;
+   font-family: "Amatica SC";
+   font-size: 20pt;
+   padding: 5px;
+   padding-left: 10px;
+   padding-right: 10px;
+   text-align: center;
+   text-decoration: none;
+   outline: none;
+}
