@@ -22,9 +22,13 @@ class SearchResults(webapp2.RequestHandler):
             "bread" : ["Peanut Butter & Jelly Sandwich", "Sub", "Pizza"],
             "chicken" : ["Roast Chicken", "Chicken Soup", "BBQ"],
         }
+        inputted_ingredient = self.request.get("ingredient").lower()
         template = env.get_template('templates/results.html')
-        ingredient_stuff = { "ingredient_stuffA" : ingredients_dict[self.request.get("ingredient")],
-                            "given_thing" : self.request.get("ingredient")}
+        ingredient_stuff = { "ingredient_stuffA" : ingredients_dict[inputted_ingredient],
+                            "given_thing" : self.request.get("ingredient"),
+                            "recipe1" : ingredients_dict[inputted_ingredient][0],
+                            "recipe2" : ingredients_dict[inputted_ingredient][1],
+                            "recipe3" : ingredients_dict[inputted_ingredient][2]}
         self.response.write(template.render(ingredient_stuff))
 
 
