@@ -9,11 +9,13 @@ body {background-image: url("back.jpg");}
 
 }
 
-#ingredientInput {
+.ingredientInput {
   display: inline;
-  font-family: "Patrick Hand";
-  font-size: 20pt;
+  font-family: "Julius Sans One";
+  font-size: 18pt;
   padding-right: 10px;
+  padding-left: 20px;
+
 }
 
 .ingredientBox {
@@ -22,7 +24,7 @@ body {background-image: url("back.jpg");}
   border: 5px solid #3E5655;
   outline: none;
   font-size: 15pt;
-  font-family: "Patrick Hand";
+  font-family: "Julius Sans One";
 }
 
 .inputButton {
@@ -32,8 +34,8 @@ body {background-image: url("back.jpg");}
    font-family: "Amatica SC";
    font-size: 20pt;
    padding: 5px;
-   padding-left: 10px;
-   padding-right: 10px;
+   padding-left: 20px;
+   padding-right: 20px;
    text-align: center;
    text-decoration: none;
    outline: none;
@@ -44,6 +46,9 @@ body {background-image: url("back.jpg");}
     color: white;
     cursor: pointer;;
 }
+
+
+
 
 /* Results Page */
 
@@ -56,12 +61,6 @@ a {
 
 a:hover {
   color: #527372
-}
-
-.missingIngred {
-  font-family: "Patrick Hand";
-  text-decoration: overline;
-  font-size: 14pt;
 }
 
 .subtitle {
