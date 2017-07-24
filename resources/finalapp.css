@@ -6,7 +6,17 @@ body {background-image: url("back.jpg");}
   width: 600px;
   height: 150px;
   padding-top: 50px;
+}
 
+.navMenu {
+  background-color: black;
+  padding: 15px;
+}
+
+.navOption {
+  color: white;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .ingredientInput {
@@ -66,6 +76,10 @@ a:hover {
 .subtitle {
   font-family: "Amatica SC";
   font-size: 35pt;
+}
+
+#results {
+  font-size: 40pt;
 }
 
 .resultButton {
