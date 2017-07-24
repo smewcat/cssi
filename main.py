@@ -22,13 +22,9 @@ class SearchResults(webapp2.RequestHandler):
             "bread" : ["Peanut Butter & Jelly Sandwich", "Sub", "Pizza"],
             "chicken" : ["Roast Chicken", "Chicken Soup", "BBQ"],
         }
-        inputted_ingredient = self.request.get("ingredient").lower()
         template = env.get_template('templates/results.html')
-        ingredient_stuff = { "ingredient_stuffA" : ingredients_dict[inputted_ingredient],
-                            "given_thing" : self.request.get("ingredient"),
-                            "recipe1" : ingredients_dict[inputted_ingredient][0],
-                            "recipe2" : ingredients_dict[inputted_ingredient][1],
-                            "recipe3" : ingredients_dict[inputted_ingredient][2]}
+        ingredient_stuff = { "ingredient_stuffA" : ingredients_dict[self.request.get("ingredient")],
+                            "given_thing" : self.request.get("ingredient")}
         self.response.write(template.render(ingredient_stuff))
 
 
@@ -41,6 +37,7 @@ class SearchResults(webapp2.RequestHandler):
     # self.response.write(template.render(ingredients_dict))
 
 #This code will be used on the user comment page so that users can login to their gmail
+#This is the handler for the
 #This is the code for the Gmail login
 #        user = users.get_current_user()
 #              if user:
