@@ -61,8 +61,20 @@ class SearchResults(webapp2.RequestHandler):
     # occasion = ndb.StringProperty()
     # num_of_people = ndb.StringProperty()
 
+class TacoPageHandler(webapp2.RequestHandler):
+    def get(self):
+        template = env.get_template('templates/taco.html')
+        self.response.write(template.render())
+
+class CakePageHandler(webapp2.RequestHandler):
+    def get(self):
+        template = env.get_template('templates/cake.html')
+        self.response.write(template.render())
+
 app = webapp2.WSGIApplication([
     ('/', HomePage),
     ('/results', SearchResults),
+    ('/taco', TacoPageHandler),
+    ('/cake', CakePageHandler),
     #('/recipeinput', RecipeInput)
 ], debug=True)
