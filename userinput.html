@@ -2,7 +2,7 @@
 
 <html>
   <head>
-      <title> The Virtual Cookbook </title>
+      <title> Epicure </title>
       <link rel="stylesheet" href="finalapp.css">
 
       <style>
@@ -15,31 +15,27 @@
   </head>
 
   <body>
-      <center>
+    <center>
       <img src="logo.png" class="logo">
       <br> <br><br> <br>
+    </center>
 
       <form action="/confirmation" method="post">
-        <p class="ingredientInput">add an ingredient, including measurements:</p>
-        <input type='text' name='ingredient' class='ingredientBox'>
+        <p class="ingredientInput">add the title of your recipe: </p>
+        <input type='text' name='title' class='ingredientBox'>
         <br><br><br>
 
-        <p class="ingredientInput">add an ingredient, including measurements:</p>
+        <p class="ingredientInput">add the link to the page for your recipe:</p>
+        <input type='text' name='link' class='ingredientBox'>
+        <br><br><br><br>
+
+        <p class="ingredientInput"> add a short description or comment:</p>
         <input type='text' name='ingredient' class='ingredientBox'>
         <br><br><br><br>
 
-        <input type='submit' value='Add Another Ingredient' class="inputButton">
-        <br><br><br><br>
-
-        <p class="ingredientInput">input your recipe here. use numbers (1., 2., 3., etc) to label your steps: </p>
-        <br><br>
-        <input type='text' name='ingredient' class='ingredientBox' id="recipeBox">
-        <br><br><br><br>
-
-        <input type='submit' value='Submit Ingredients' class="inputButton">
+        <input type='submit' value='Submit Recipe' class="inputButton">
         <br>
         <br>
-      </center>
 
   </body>
 </html>
