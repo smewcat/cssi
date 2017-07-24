@@ -1,5 +1,15 @@
 import jinja2
 import webapp2
+from google.appengine.ext import ndb
+
+INGREDIENT_TO_RECIPES = {
+    "eggs" : ["cake", "hard-boiled egg", "ultimate breakfast"],
+    "milk" : ["milkshake", "waffles/pancake", "cereal"],
+    "lettuce" : ["salad", "taco", "burger"],
+    "bread" : ["Peanut Butter & Jelly Sandwich", "Sub", "Pizza"],
+    "chicken" : ["Roast Chicken", "Chicken Soup", "BBQ"],
+}
+
 #from google.appengine.api import users - for Gmail login
 env=jinja2.Environment(loader=jinja2.FileSystemLoader(''))
 
@@ -13,23 +23,13 @@ class HomePage(webapp2.RequestHandler):
 # This handler will display the search results from the user's input.
 class SearchResults(webapp2.RequestHandler):
     def get(self):
-        # This dictionary will store the ingredients as keys and the recipies that one
-        # could make as values.
-        ingredients_dict = {
-            "eggs" : ["cake", "hard-boiled egg", "ultimate breakfast"],
-            "milk" : ["milkshake", "waffles/pancake", "cereal"],
-            "lettuce" : ["salad", "taco", "burger"],
-            "bread" : ["Peanut Butter & Jelly Sandwich", "Sub", "Pizza"],
-            "chicken" : ["Roast Chicken", "Chicken Soup", "BBQ"],
-        }
         inputted_ingredient = self.request.get("ingredient").lower()
         template = env.get_template('templates/results.html')
-        ingredient_stuff = { "ingredient_stuffA" : ingredients_dict[inputted_ingredient],
-                            "given_thing" : self.request.get("ingredient"),
-                            "recipe1" : ingredients_dict[inputted_ingredient][0],
-                            "recipe2" : ingredients_dict[inputted_ingredient][1],
-                            "recipe3" : ingredients_dict[inputted_ingredient][2]}
-        self.response.write(template.render(ingredient_stuff))
+        recipe_display_dict = { "ingredient_stuffA" : INGREDIENT_TO_RECIPES[inputted_ingredient],
+                            "recipe1" : INGREDIENT_TO_RECIPES[inputted_ingredient][0],
+                            "recipe2" : INGREDIENT_TO_RECIPES[inputted_ingredient][1],
+                            "recipe3" : INGREDIENT_TO_RECIPES[inputted_ingredient][2]}
+        self.response.write(template.render(recipe_display_dict))
 
 
 # This handler will display the different ingredients required for the certain
@@ -38,7 +38,7 @@ class SearchResults(webapp2.RequestHandler):
  #def get(self):
     # #make sure you have the correct html file name here
     # template = env.get_template(' ')
-    # self.response.write(template.render(ingredients_dict))
+    # self.response.write(template.render(INGREDIENT_TO_RECIPES))
 
 #This code will be used on the user comment page so that users can login to their gmail
 #This is the handler for the
@@ -51,6 +51,15 @@ class SearchResults(webapp2.RequestHandler):
 #                greeting = ('<a href="%s">Sign in with a Google account</a>' %
 #                    users.create_login_url('/'))
 #        self.response.write('<html><body>%s</body></html>' % greeting)
+
+# This handler will store the comments and recipes inputted by the users
+#class InputAndCommentStore(ndb.Model):
+    # THESE ARE EXAMPLES OF RETRIVING DATA FROM THE DATASTORE
+    # day = ndb.DateProperty()
+    # time = ndb.StringProperty()
+    # venue = ndb.StringProperty()
+    # occasion = ndb.StringProperty()
+    # num_of_people = ndb.StringProperty()
 
 app = webapp2.WSGIApplication([
     ('/', HomePage),
