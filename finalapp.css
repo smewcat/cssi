@@ -9,7 +9,7 @@ body {background-image: url("back.jpg");}
 
 }
 
-#ingredientInput {
+.ingredientInput {
   display: inline;
   font-family: "Patrick Hand";
   font-size: 20pt;
@@ -93,4 +93,15 @@ a:hover {
     background-color: #293939;
     color: white;
     cursor: pointer;;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
 }
