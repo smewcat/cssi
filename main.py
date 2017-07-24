@@ -22,6 +22,11 @@ class SearchResults(webapp2.RequestHandler):
             "bread" : ["Peanut Butter & Jelly Sandwich", "Sub", "Pizza"],
             "chicken" : ["Roast Chicken", "Chicken Soup", "BBQ"],
         }
+        template = env.get_template('templates/results.html')
+        ingredient_stuff = { "ingredient_stuffA" : ingredients_dict[self.request.get("ingredient")],
+                            "given_thing" : self.request.get("ingredient")}
+        self.response.write(template.render(ingredient_stuff))
+
 
 # This handler will display the different ingredients required for the certain
 # recipe loaded.
