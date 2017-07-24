@@ -1,6 +1,6 @@
 import jinja2
 import webapp2
-
+#from google.appengine.api import users - for Gmail login
 env=jinja2.Environment(loader=jinja2.FileSystemLoader(''))
 
 # This handler will load up the Home Page of the website.  It will recieve the inputs
@@ -13,7 +13,7 @@ class HomePage(webapp2.RequestHandler):
 # This handler will display the search results from the user's input.
 class SearchResults(webapp2.RequestHandler):
     def get(self):
-        # This dictionary will store the ingredients as keys and the receipies that one
+        # This dictionary will store the ingredients as keys and the recipies that one
         # could make as values.
         ingredients_dict = {
             "eggs" : ["cake", "hard-boiled egg", "ultimate breakfast"],
@@ -36,8 +36,19 @@ class SearchResults(webapp2.RequestHandler):
     # template = env.get_template(' ')
     # self.response.write(template.render(ingredients_dict))
 
+#This code will be used on the user comment page so that users can login to their gmail
+#This is the code for the Gmail login
+#        user = users.get_current_user()
+#              if user:
+#                greeting = ('<a id = "greeting" >Welcome, %s!</a>' % user.nickname()+ ' ' + '<a href="%s">(sign out)</a>' %
+#                      users.create_logout_url('/'))
+#            else:
+#                greeting = ('<a href="%s">Sign in with a Google account</a>' %
+#                    users.create_login_url('/'))
+#        self.response.write('<html><body>%s</body></html>' % greeting)
+
 app = webapp2.WSGIApplication([
     ('/', HomePage),
     ('/results', SearchResults),
-    #('/food', Food)
+    #('/recipeinput', RecipeInput)
 ], debug=True)

@@ -2,10 +2,11 @@ body {background-image: url("back.jpg");}
 
 /* Ingredient Entry Page */
 
-.title {
-  font-family: "Amatica SC";
-  font-size: 40pt;
-  background-color: white;
+.logo{
+  width: 600px;
+  height: 150px;
+  padding-top: 50px;
+
 }
 
 #ingredientInput {
@@ -39,6 +40,53 @@ body {background-image: url("back.jpg");}
 }
 
 .inputButton:hover {
+    background-color: #293939;
+    color: white;
+    cursor: pointer;;
+}
+
+/* Results Page */
+
+a {
+  font-family: "Julius Sans One";
+  font-size: 18pt;
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: #527372
+}
+
+.missingIngred {
+  font-family: "Patrick Hand";
+  text-decoration: overline;
+  font-size: 14pt;
+}
+
+.subtitle {
+  font-family: "Amatica SC";
+  font-size: 35pt;
+}
+
+.resultButton {
+  background-color: #3E5655;
+   border: 2px solid white;
+   color: white;
+   font-family: "Amatica SC";
+   font-size: 20pt;
+   padding: 5px;
+   padding-left: 10px;
+   padding-right: 10px;
+   text-align: center;
+   text-decoration: none;
+   outline: none;
+   display: inline;
+   margin-left: 10px;
+   margin-right: 10px;
+}
+
+.resultButton:hover {
     background-color: #293939;
     color: white;
     cursor: pointer;;
