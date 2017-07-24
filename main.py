@@ -1,7 +1,7 @@
 import jinja2
 import webapp2
 from google.appengine.ext import ndb
-from google.appengine.ext import ndb
+from google.appengine.ext import users
 
 INGREDIENT_TO_RECIPES = {
     "eggs" : ["cake", "hard-boiled egg", "ultimate breakfast"],
