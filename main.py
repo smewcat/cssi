@@ -3,7 +3,7 @@ import webapp2
 #from google.appengine.api import users - for Gmail login
 env=jinja2.Environment(loader=jinja2.FileSystemLoader(''))
 
-# This handler will load up the Home Page of the website.  It will recieve the inputs
+# This handler will load up the Home Page of the website.  It will recieve the recipe inputs
 # from the user.
 class HomePage(webapp2.RequestHandler):
     def get(self):
@@ -31,29 +31,23 @@ class SearchResults(webapp2.RequestHandler):
                             "recipe3" : ingredients_dict[inputted_ingredient][2]}
         self.response.write(template.render(ingredient_stuff))
 
-
-# This handler will display the different ingredients required for the certain
-# recipe loaded.
-#class Food(webapp2.RequestHandler):
- #def get(self):
-    # #make sure you have the correct html file name here
-    # template = env.get_template(' ')
-    # self.response.write(template.render(ingredients_dict))
-
-#This code will be used on the user comment page so that users can login to their gmail
-#This is the handler for the
-#This is the code for the Gmail login
-#        user = users.get_current_user()
-#              if user:
-#                greeting = ('<a id = "greeting" >Welcome, %s!</a>' % user.nickname()+ ' ' + '<a href="%s">(sign out)</a>' %
-#                      users.create_logout_url('/'))
-#            else:
-#                greeting = ('<a href="%s">Sign in with a Google account</a>' %
-#                    users.create_login_url('/'))
-#        self.response.write('<html><body>%s</body></html>' % greeting)
+#This is the handler for the recipeinput
+class RecipeInput(webapp2.RequestHandler):
+    def get(self):
+    #This is the code for the Gmail login
+        user = users.get_current_user()
+            if user:
+                greeting = ('<a id = "greeting" >Welcome, %s!</a>' % user.nickname()+ ' ' + '<a href="%s">(sign out)</a>' %
+                      users.create_logout_url('/'))
+            else:
+                greeting = ('<a href="%s">Sign in with a Google account</a>' %
+                    users.create_login_url('/'))
+            self.response.write('<html><body>%s</body></html>' % greeting)
+            template = env.get_template('templates/userinput.html')
+            self.response.write(template.render())
 
 app = webapp2.WSGIApplication([
     ('/', HomePage),
     ('/results', SearchResults),
-    #('/recipeinput', RecipeInput)
+    ('/recipeinput', RecipeInput)
 ], debug=True)
