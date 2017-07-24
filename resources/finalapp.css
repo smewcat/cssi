@@ -90,3 +90,61 @@ a:hover {
     color: white;
     cursor: pointer;;
 }
+
+
+
+
+/* Food Pages */
+
+.foodImg {
+  width: 350px;
+  height: 250px;
+  border: 5px solid #3E5655;
+}
+
+.foodTitle {
+  font-family: "Amatica SC";
+  font-size: 45pt;
+}
+
+.foodSubtitle {
+  font-family: "Julius Sans One";
+  font-size: 23pt;
+  padding-left: 45px;
+}
+
+ul{
+  column-count: 2;
+}
+
+.Ingredient {
+    list-style-type: circle;
+    margin-left: 45px;
+    font-family: "Coming Soon";
+    font-size: 14pt;
+  }
+
+.recipeStep {
+  font-family: "Coming Soon";
+  margin-left: 45px;
+  font-size: 14pt;
+  text-align: justify;
+  padding-right: 55px;
+}
+
+.moreInfo {
+  font-family: "Julius Sans One";
+  font-size: 23pt;
+}
+
+.closing {
+  font-family: "Coming Soon";
+  font-size: 13pt;
+}
+
+.foodlink {
+  font-family: "Coming Soon";
+  font-style: oblique;
+  font-size: 16pt;
+  font-variant: small-caps;
+}

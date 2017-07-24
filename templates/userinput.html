@@ -19,28 +19,24 @@
       <img src="resources/EPLogo.png" class="logo">
       <br> <br><br> <br>
     </center>
-      <div id = 'comments'>
-      <form id = 'comment-form' action="/confirmation" method="post">
+
+      <form action="/confirmation" method="post">
+
         <p class="ingredientInput">add the title of your recipe: </p>
-        <input id = 'comment-content' type='text' name='title' class='ingredientBox'>
-        <br><br><br>
+        <input type='text' name='Title' class='ingredientBox'></input>
+        <br><br><br><br>
 
         <p class="ingredientInput">add the link to the page for your recipe:</p>
-        <input id = "comment-content" type='text' name='link' class='ingredientBox'>
+        <input type='text' name='Link' class='ingredientBox'></input>
         <br><br><br><br>
 
-        <p class="ingredientInput"> add keywords for your recipe (category, ingredients), seperated by commas</p>
-
-        <p class="ingredientInput"> add a short description or comment:</p>
-
-        <input type='text' name='ingredient' class='ingredientBox'>
+        <p class= "ingredientInput">add keywords for your recipe (category, ingredients) separated by commas, or add a short description or comment:</p>
+        <input type='text' name='Description' class='ingredientBox'></input>
         <br><br><br><br>
+
         <input type='submit' value='Submit Recipe' class="inputButton">
         <br>
         <br>
-      </div>
-    </form>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="resources/comment-page.js"></script>
+      </form>
   </body>
 </html>
