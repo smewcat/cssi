@@ -37,6 +37,7 @@ class SearchResults(webapp2.RequestHandler):
     # self.response.write(template.render(ingredients_dict))
 
 #This code will be used on the user comment page so that users can login to their gmail
+#This is the handler for the
 #This is the code for the Gmail login
 #        user = users.get_current_user()
 #              if user:
