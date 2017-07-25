@@ -4,10 +4,10 @@ from google.appengine.ext import ndb
 from google.appengine.api import users
 
 INGREDIENT_TO_RECIPES = {
-    "eggs" : ["cake", "hard-boiled egg", "ultimate breakfast"],
-    "milk" : ["milkshake", "waffles/pancake", "cereal"],
+    "eggs" : ["cake", "hard-boiled egg", "ultimate breakfast", "sunny-side up", "deviled eggs"],
+    "milk" : ["milkshake", "waffles/pancake", "cereal", "cheese"],
     "lettuce" : ["salad", "taco", "burger"],
-    "bread" : ["Peanut Butter & Jelly Sandwich", "Sub", "Pizza"],
+    "bread" : ["peanut butter & jelly sandwich", "sub", "pizza", "bagels", "sandwiches"],
     "chicken" : ["Roast Chicken", "Chicken Soup", "BBQ"],
 }
 
@@ -39,13 +39,9 @@ class SearchResults(webapp2.RequestHandler):
     def get(self):
         inputted_ingredient = self.request.get("ingredient").lower()
         template = env.get_template('templates/results.html')
-        recipe_display_dict = { "ingredientA" : inputted_ingredient,
-                            "ingredient_stuffA" : INGREDIENT_TO_RECIPES[inputted_ingredient],
-                            "recipe1" : INGREDIENT_TO_RECIPES[inputted_ingredient][0],
-                            "recipe2" : INGREDIENT_TO_RECIPES[inputted_ingredient][1],
-                            "recipe3" : INGREDIENT_TO_RECIPES[inputted_ingredient][2]}
+        results_params= { "recipes" : INGREDIENT_TO_RECIPES[inputted_ingredient]}
         gmail_login(self)
-        self.response.write(template.render(recipe_display_dict))
+        self.response.write(template.render(results_params))
 
 #This is the handler for the recipeinput
 class RecipeInput(webapp2.RequestHandler):
@@ -96,6 +92,13 @@ class CakePageHandler(webapp2.RequestHandler):
         gmail_login(self)
         template = env.get_template('templates/cake.html')
         self.response.write(template.render())
+
+class FoodResultsPageHandler(webapp2.RequestHandler):
+    def get(self):
+        eggs_recipes = {}
+        for i in range(len(INGREDIENT_TO_RECIPES['eggs'])):
+            eggs_recipes['recipe' + str(i+1)] = INGREDIENT_TO_RECIPES['eggs'][i]
+        template = env.get_template('templates/taco.html')  # This needs to change for different recipes
 
 app = webapp2.WSGIApplication([
     ('/', HomePage),

@@ -30,23 +30,15 @@
 
     <h1 class="subtitle" id="results"> Results </h1>
 
-    <h3>
-      <a href="/cake"> {{ recipe1 }} <!--title of recipe #3--> </a>
-    </h3>
 
-    <br>
+{% for recipe in recipes %}
+<h3>
+  <a href="/cake">  {{ recipe }} <!--title of recipe #3--> </a>
+</h3>
+<br>
+{% endfor %}
 
-    <h3>
-      <a href="/taco"> {{ recipe2 }} <!--title of recipe #3--> </a>
-    </h3>
-
-      <br>
-
-        <h3>
-          <a href="/"> {{ recipe3 }} <!--title of recipe #3--> </a>
-        </h3>
-
-        <br><br>
+<br><br>
 
       <br><br>  <br><br>
     </center>
