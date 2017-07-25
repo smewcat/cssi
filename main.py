@@ -109,3 +109,12 @@ app = webapp2.WSGIApplication([
     ('/taco', TacoPageHandler),
     ('/cake', CakePageHandler),
 ], debug=True)
+
+
+
+#This code is for recipes after confirmatio page
+#    query = Recipe.query()
+#    query = query.order(Recipe.Title)
+#    recipes = query.fetch() #now a list of recipe objects
+#self.response.write(
+#template.render({'recipes' : recipes}))
