@@ -34,10 +34,11 @@
       <h2 class="foodSubtitle"> Ingredients </h2>
 
       <ul>
-      {% for each_ingredeint in ingredients %}
-        <li class="Ingredient"> Ingredient {{ each_ingredeint }} </li>
+      {% for each_ingredient in ingredients %}
+        {% set each_ingredient = ingredients.split(", ") %}
+          <li class="Ingredient"> Ingredient {{ each_ingredeint }} </li>
       {% endfor %}
-        </ul>
+          </ul>
 
         <br><br>
 

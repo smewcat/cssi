@@ -74,11 +74,13 @@ class ConfirmationPage(webapp2.RequestHandler):
          )
         recipe.put() #this lets you store event into datastore
 
+# This is creates an object of recipe input
 class Recipe(ndb.Model): #this is the recipe
     Title = ndb.StringProperty()
     Link = ndb.StringProperty()
     Description = ndb.StringProperty()
 
+# It outputs all the recipes that have been stored in the data store.
 class UserDatabase(webapp2.RequestHandler):
     def get(self):
         gmail_login(self)
@@ -98,9 +100,11 @@ class CakePageHandler(webapp2.RequestHandler):
         template = env.get_template('templates/cake.html')
         self.response.write(template.render())
 
+# This handler will create a template for the different recipes. It displays the
+# name of the recipe, the ingredients, and the procedures.
 class FoodResultsPageHandler(webapp2.RequestHandler):
-    def post(self):
-        template = jinja_environment.get_template('templates/recipe.html')   #Need to change the name for the HTML file
+    def get(self):
+        template = env.get_template('templates/recipetemplate.html')   #Need to change the name for the HTML file
         page_stuff = {
         'recipe_name' : self.request.get('recipe_name'),
         'ingredients' : self.request.get('ingredients'),
@@ -111,7 +115,7 @@ class FoodResultsPageHandler(webapp2.RequestHandler):
             ingredients = self.request.get('ingredients'),
             procedure = self.request.get('procedure'),
         )
-        recipe.put() # This makes it remember the date for a long time
+        recipe_page_template.put() # This makes it remember the date for a long time
 
 
 class UserRecipePage(webapp2.RequestHandler):
@@ -119,7 +123,6 @@ class UserRecipePage(webapp2.RequestHandler):
         gmail_login(self)
         template = env.get_template('templates/recipetemplate.html')
         self.response.write(template.render())
-
 
 # This handler will store the comments and recipes inputted by the users in the datastore
 class RecipePageTemplate(ndb.Model):
@@ -138,6 +141,7 @@ app = webapp2.WSGIApplication([
     ('/taco', TacoPageHandler),
     ('/cake', CakePageHandler),
     ('/recipe', UserRecipePage),
+    ('/food', FoodResultsPageHandler)
 ], debug=True)
 
 
