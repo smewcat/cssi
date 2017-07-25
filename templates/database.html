@@ -33,11 +33,13 @@
       <center>
         <h1 id="resultsTitle"> Results </h1>
 
-        <h2 class=foodTitle> Food Title {{ Title }}</h2>
-        <h3 class=foodDes> Submitted on {{ date }}</h3>
-        <br>
-        <h2 class=foodTitle> Food Title {{ Title }}</h2>
-        <h3 class=foodDes> Submitted on {{ date }}</h3>
+        {% for recipe in recipes %}
+            <h2 class=foodTitle> Food Title: {{ recipe.Title }}</h2>
+            <h3 class=foodDes> Ingredients: {{ recipe.Ingredients }}</h3>
+            <h3 class=foodDes> Description: {{ recipe.Description }}</h3>
+            <h3 class=foodDes> Submitted on {{ recipe.Time }}</h3>
+            <br>
+        {% endfor %}
       </center>
 
 

@@ -1,5 +1,6 @@
 import jinja2
 import webapp2
+import time
 from google.appengine.ext import ndb
 from google.appengine.api import users
 
@@ -51,12 +52,6 @@ class RecipeInput(webapp2.RequestHandler):
             template = env.get_template('templates/userinput.html')
             self.response.write(template.render())
 
-<<<<<<< HEAD
-=======
-# This handler will store the comments and recipes inputted by the users
-
-
->>>>>>> b9c3dfaf0533a5593c186eff42ece8f0440366b5
 class ConfirmationPage(webapp2.RequestHandler):
     def get(self):
         gmail_login(self)
@@ -65,31 +60,39 @@ class ConfirmationPage(webapp2.RequestHandler):
 
     def post(self):
         gmail_login(self)
+        localtime = time.localtime(time.time())
         template = env.get_template('templates/recipes.html')
         self.response.write(
             template.render({
             'Title':self.request.get('Title'),
-            'Link': self.request.get('Link'),
+            'Ingredients': self.request.get('Ingredients'),
             'Description':self.request.get('Description'),
+            'Time':self.request.get('localtime')
             }))
         recipe = Recipe( #putting parameters in recipe object
             Title=self.request.get('Title'),
-            Link=self.request.get('Link'),
-            Description=self.request.get('Description')
+            Ingredients=self.request.get('Ingredients'),
+            Description=self.request.get('Description'),
+            Time=self.request.get('localtime')
          )
         recipe.put() #this lets you store event into datastore
 
 class Recipe(ndb.Model): #this is the recipe
     Title = ndb.StringProperty()
-    Link = ndb.StringProperty()
+    Ingredients = ndb.StringProperty()
     Description = ndb.StringProperty()
+    Time = ndb.StringProperty()
 
 class UserDatabase(webapp2.RequestHandler):
     def get(self):
         gmail_login(self)
+        #This code is for recipes to display after confirmation page
+        query = Recipe.query()
+        query = query.order(Recipe.Title)
+        recipes = query.fetch() #now a list of recipe objects
         template = env.get_template('templates/database.html')
-        self.response.write(template.render())
-        #This also needs recipe display
+        self.response.write(
+        template.render({'recipes' : recipes}))
 
 class TacoPageHandler(webapp2.RequestHandler):
     def get(self):
@@ -103,27 +106,27 @@ class CakePageHandler(webapp2.RequestHandler):
         template = env.get_template('templates/cake.html')
         self.response.write(template.render())
 
-class FoodResultsPageHandler(webapp2.RequestHandler):
-    def post(self):
-        template = jinja_environment.get_template('templates/recipe.html')   #Need to change the name for the HTML file
-        page_stuff = {
-        'recipe_name' : self.request.get('recipe_name'),
-        'ingredients' : self.request.get('ingredients'),
-        'procedure' : self.request.get('procedure') }
-        self.response.write(template.render(page_stuff))
-        recipe = Recipe(
-            recipe_name = self.request.get('recipe_name'),
-            ingredients = self.request.get('ingredients'),
-            procedure = self.request.get('procedure'),
-        )
-        recipe.put() # This makes it remember the date for a long time
+#class FoodResultsPageHandler(webapp2.RequestHandler):
+#    def post(self):
+#        template = jinja_environment.get_template('templates/recipes.html')   #Need to change the name for the HTML file
+#        page_stuff = {
+#        'recipe_name' : self.request.get('recipe_name'),
+#        'ingredients' : self.request.get('ingredients'),
+#        'procedure' : self.request.get('procedure') }
+#        self.response.write(template.render(page_stuff))
+#        recipe = Recipe(
+#            recipe_name = self.request.get('recipe_name'),
+#            ingredients = self.request.get('ingredients'),
+#            procedure = self.request.get('procedure'),
+#        )
+#        recipe.put() # This makes it remember the date for a long time
 
 # This handler will store the comments and recipes inputted by the users in the datastore
-class Recipe(ndb.Model):
-    # NEED TO ADD A WAY TO ACCESS PICTURES FROM THE DATASTORE
-    recipe_name = ndb.StringProperty()
-    ingredients = ndb.StringProperty()
-    procedure = ndb.StringProperty()
+#class Recipe(ndb.Model):
+#    # NEED TO ADD A WAY TO ACCESS PICTURES FROM THE DATASTORE
+#    recipe_name = ndb.StringProperty()
+#    ingredients = ndb.StringProperty()
+#    procedure = ndb.StringProperty()
 
 
 app = webapp2.WSGIApplication([
@@ -135,14 +138,6 @@ app = webapp2.WSGIApplication([
     ('/taco', TacoPageHandler),
     ('/cake', CakePageHandler),
 ], debug=True)
-
-
-#This code is for recipes to display after confirmation page
-#    query = Recipe.query()
-#    query = query.order(Recipe.Title)
-#    recipes = query.fetch() #now a list of recipe objects
-#self.response.write(
-#template.render({'recipes' : recipes}))
 
 
 # This handler will store the comments inputted by the users
