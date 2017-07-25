@@ -51,9 +51,12 @@ class RecipeInput(webapp2.RequestHandler):
             template = env.get_template('templates/userinput.html')
             self.response.write(template.render())
 
+<<<<<<< HEAD
+=======
 # This handler will store the comments and recipes inputted by the users
 
 
+>>>>>>> b9c3dfaf0533a5593c186eff42ece8f0440366b5
 class ConfirmationPage(webapp2.RequestHandler):
     def get(self):
         gmail_login(self)
@@ -140,3 +143,13 @@ app = webapp2.WSGIApplication([
 #    recipes = query.fetch() #now a list of recipe objects
 #self.response.write(
 #template.render({'recipes' : recipes}))
+
+
+# This handler will store the comments inputted by the users
+#class InputAndCommentStore(ndb.Model):
+    # THESE ARE EXAMPLES OF RETRIVING DATA FROM THE DATASTORE
+    # day = ndb.DateProperty()
+    # time = ndb.StringProperty()
+    # venue = ndb.StringProperty()
+    # occasion = ndb.StringProperty()
+    # num_of_people = ndb.StringProperty()
