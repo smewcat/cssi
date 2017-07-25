@@ -35,6 +35,18 @@ body {background-image: url("back.jpg");}
   outline: none;
   font-size: 15pt;
   font-family: "Julius Sans One";
+  margin-left: 17px;
+}
+
+.ingredienttexBox {
+  width: 500px;
+  height: 250px;
+  border: 5px solid #3E5655;
+  font-size: 15pt;
+  font-family: "Coming Soon";
+  margin-left: 17px;
+  padding-top: 5px;
+
 }
 
 .inputButton {
@@ -174,4 +186,20 @@ ul{
   font-style: oblique;
   font-size: 16pt;
   font-variant: small-caps;
+}
+
+
+
+
+
+/* Database Page */
+
+.entryTitle {
+  font-family: "Amatica SC";
+  font-size: 30pt;
+}
+
+.entryDesc {
+  font-family: "Coming Soon";
+  text-decoration: overline;
 }

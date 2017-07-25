@@ -65,6 +65,10 @@ class RecipeInput(webapp2.RequestHandler):
     # num_of_people = ndb.StringProperty()
 
 class RecipePage(webapp2.RequestHandler):
+    def get(self):
+        gmail_login(self)
+        template = env.get_template('templates/recipes.html')
+        self.response.write(template.render())
     def post(self):
         template = env.get_template('templates/recipes.html')
         self.response.write(
