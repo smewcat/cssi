@@ -194,12 +194,13 @@ ul{
 
 /* Database Page */
 
-.entryTitle {
+.confirmation {
   font-family: "Amatica SC";
-  font-size: 30pt;
+  font-size: 40pt;
 }
 
-.entryDesc {
-  font-family: "Coming Soon";
-  text-decoration: overline;
+#confirmLink {
+  font-family: "Amatica SC";
+  font-size: 40pt;
+  text-decoration: underline;
 }
