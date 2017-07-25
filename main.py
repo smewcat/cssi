@@ -70,6 +70,7 @@ class ConfirmationPage(webapp2.RequestHandler):
         template = env.get_template('templates/recipes.html')
         self.response.write(template.render())
     def post(self):
+        gmail_login(self)
         template = env.get_template('templates/recipes.html')
         self.response.write(
             template.render({
@@ -89,11 +90,12 @@ class Recipe(ndb.Model): #this is the recipe
     Link = ndb.StringProperty()
     Description = ndb.StringProperty()
 
-#class UserDatabase(webapp2.RequestHandler):
-    #def get(self):
-        #gmail_login(self)
-        #template = env.get_template('templates/recipes.html')
-        #self.response.write(template.render())
+class UserDatabase(webapp2.RequestHandler):
+    def get(self):
+        gmail_login(self)
+        template = env.get_template('templates/database.html')
+        self.response.write(template.render())
+        #This also needs recipe display
 
 class TacoPageHandler(webapp2.RequestHandler):
     def get(self):
@@ -112,7 +114,7 @@ app = webapp2.WSGIApplication([
     ('/results', SearchResults),
     ('/recipeinput', RecipeInput),
     ('/confirmation', ConfirmationPage),
-    ('/database', UserDatabase)
+    ('/database', UserDatabase),
     ('/taco', TacoPageHandler),
     ('/cake', CakePageHandler),
 ], debug=True)
