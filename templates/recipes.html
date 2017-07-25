@@ -1,12 +1,35 @@
 <!DOCTYPE html>
-Your recipe has been saved.
-<br><br><br>
 
-Title: {{ Title }}
+<html>
+  <head>
+    <title> Epicure </title>
+    <link rel="stylesheet" href="resources/finalapp.css">
+
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Amatica+SC');
+      @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
+      @import url('https://fonts.googleapis.com/css?family=Coming+Soon|Patrick+Hand');
+      @import url('https://fonts.googleapis.com/css?family=Julius+Sans+One');
+    </style>
+
+  </head>
 
 <br><br>
+Description: {{ Description }}
+<body>
 
-Link: {{ Link }}
+  <form action="/">
+    <center>
+      <img src="resources/EPLogo.png" class="logo">
+      <br><b><br>
 
-<br><br>
-Description: {{ Description }}.
+
+    <h2 class='confirmation'> Thank you! Your recipe for {{ Title }} has been logged.</h2>
+    <h2 class='confirmation'> Visit the User Database
+      <a href='/database' id="confirmLink"> here! </a> </h2>
+
+
+
+  </body>
+  </html>
+>>>>>>> 774167d098b9cbb7b7d6465d7c7cc3f4d7034953

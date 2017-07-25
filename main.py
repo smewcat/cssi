@@ -60,8 +60,13 @@ class RecipeInput(webapp2.RequestHandler):
     # occasion = ndb.StringProperty()
     # num_of_people = ndb.StringProperty()
 
-class RecipePage(webapp2.RequestHandler):
+class ConfirmationPage(webapp2.RequestHandler):
+    def get(self):
+        gmail_login(self)
+        template = env.get_template('templates/recipes.html')
+        self.response.write(template.render())
     def post(self):
+        gmail_login(self)
         template = env.get_template('templates/recipes.html')
         self.response.write(
             template.render({
@@ -80,6 +85,13 @@ class Recipe(ndb.Model): #this is the recipe
     Title = ndb.StringProperty()
     Link = ndb.StringProperty()
     Description = ndb.StringProperty()
+
+class UserDatabase(webapp2.RequestHandler):
+    def get(self):
+        gmail_login(self)
+        template = env.get_template('templates/database.html')
+        self.response.write(template.render())
+        #This also needs recipe display
 
 class TacoPageHandler(webapp2.RequestHandler):
     def get(self):
@@ -104,7 +116,16 @@ app = webapp2.WSGIApplication([
     ('/', HomePage),
     ('/results', SearchResults),
     ('/recipeinput', RecipeInput),
-    ('/confirmation', RecipePage),
+    ('/confirmation', ConfirmationPage),
+    ('/database', UserDatabase),
     ('/taco', TacoPageHandler),
     ('/cake', CakePageHandler),
 ], debug=True)
+
+
+#This code is for recipes to display after confirmation page
+#    query = Recipe.query()
+#    query = query.order(Recipe.Title)
+#    recipes = query.fetch() #now a list of recipe objects
+#self.response.write(
+#template.render({'recipes' : recipes}))
