@@ -5,7 +5,7 @@ from google.appengine.api import users
 
 INGREDIENT_TO_RECIPES = {
     "eggs" : ["cake", "hard-boiled egg", "ultimate breakfast"],
-    "milk" : ["milkshake", "waffles/pancake", "cereal"],
+    "milk" : ["milkshake", "pancakes", "cereal"],
     "lettuce" : ["salad", "taco", "burger"],
     "bread" : ["Peanut Butter & Jelly Sandwich", "Sub", "Pizza"],
     "chicken" : ["Roast Chicken", "Chicken Soup", "BBQ"],
@@ -64,7 +64,7 @@ class RecipeInput(webapp2.RequestHandler):
     # occasion = ndb.StringProperty()
     # num_of_people = ndb.StringProperty()
 
-class RecipePage(webapp2.RequestHandler):
+class ConfirmationPage(webapp2.RequestHandler):
     def get(self):
         gmail_login(self)
         template = env.get_template('templates/recipes.html')
@@ -89,6 +89,12 @@ class Recipe(ndb.Model): #this is the recipe
     Link = ndb.StringProperty()
     Description = ndb.StringProperty()
 
+#class UserDatabase(webapp2.RequestHandler):
+    #def get(self):
+        #gmail_login(self)
+        #template = env.get_template('templates/recipes.html')
+        #self.response.write(template.render())
+
 class TacoPageHandler(webapp2.RequestHandler):
     def get(self):
         gmail_login(self)
@@ -105,14 +111,14 @@ app = webapp2.WSGIApplication([
     ('/', HomePage),
     ('/results', SearchResults),
     ('/recipeinput', RecipeInput),
-    ('/confirmation', RecipePage),
+    ('/confirmation', ConfirmationPage),
+    ('/database', UserDatabase)
     ('/taco', TacoPageHandler),
     ('/cake', CakePageHandler),
 ], debug=True)
 
 
-
-#This code is for recipes after confirmatio page
+#This code is for recipes to display after confirmation page
 #    query = Recipe.query()
 #    query = query.order(Recipe.Title)
 #    recipes = query.fetch() #now a list of recipe objects
