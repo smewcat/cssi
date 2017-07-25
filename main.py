@@ -1,5 +1,6 @@
 import jinja2
 import webapp2
+import datetime
 from google.appengine.ext import ndb
 from google.appengine.api import users
 
@@ -69,7 +70,8 @@ class ConfirmationPage(webapp2.RequestHandler):
         recipe = Recipe( #putting parameters in recipe object
             Title=self.request.get('Title'),
             Ingredients=self.request.get('Ingredients'),
-            Description=self.request.get('Description')
+            Description=self.request.get('Description'),
+            Date=datetime.date.today()
          )
         recipe.put() #this lets you store event into datastore
 
@@ -78,6 +80,7 @@ class Recipe(ndb.Model): #this is the recipe
     Title = ndb.StringProperty()
     Ingredients = ndb.StringProperty()
     Description = ndb.StringProperty()
+    Date = ndb.DateProperty()
 
 # It outputs all the recipes that have been stored in the data store.
 class UserDatabase(webapp2.RequestHandler):
