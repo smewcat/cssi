@@ -51,12 +51,7 @@ class RecipeInput(webapp2.RequestHandler):
             template = env.get_template('templates/userinput.html')
             self.response.write(template.render())
 
-<<<<<<< HEAD
-=======
 # This handler will store the comments and recipes inputted by the users
-
-
->>>>>>> b9c3dfaf0533a5593c186eff42ece8f0440366b5
 class ConfirmationPage(webapp2.RequestHandler):
     def get(self):
         gmail_login(self)
@@ -111,7 +106,7 @@ class FoodResultsPageHandler(webapp2.RequestHandler):
         'ingredients' : self.request.get('ingredients'),
         'procedure' : self.request.get('procedure') }
         self.response.write(template.render(page_stuff))
-        recipe = Recipe(
+        recipe_page_template = RecipePageTemplate(
             recipe_name = self.request.get('recipe_name'),
             ingredients = self.request.get('ingredients'),
             procedure = self.request.get('procedure'),
@@ -119,7 +114,7 @@ class FoodResultsPageHandler(webapp2.RequestHandler):
         recipe.put() # This makes it remember the date for a long time
 
 # This handler will store the comments and recipes inputted by the users in the datastore
-class Recipe(ndb.Model):
+class RecipePageTemplate(ndb.Model):
     # NEED TO ADD A WAY TO ACCESS PICTURES FROM THE DATASTORE
     recipe_name = ndb.StringProperty()
     ingredients = ndb.StringProperty()
