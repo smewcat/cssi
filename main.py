@@ -113,6 +113,14 @@ class FoodResultsPageHandler(webapp2.RequestHandler):
         )
         recipe.put() # This makes it remember the date for a long time
 
+
+class UserRecipePage(webapp2.RequestHandler):
+    def get(self):
+        gmail_login(self)
+        template = env.get_template('templates/recipetemplate.html')
+        self.response.write(template.render())
+
+
 # This handler will store the comments and recipes inputted by the users in the datastore
 class RecipePageTemplate(ndb.Model):
     # NEED TO ADD A WAY TO ACCESS PICTURES FROM THE DATASTORE
@@ -129,6 +137,7 @@ app = webapp2.WSGIApplication([
     ('/database', UserDatabase),
     ('/taco', TacoPageHandler),
     ('/cake', CakePageHandler),
+    ('/recipe', UserRecipePage),
 ], debug=True)
 
 
