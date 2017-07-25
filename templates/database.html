@@ -37,7 +37,7 @@
             <h2 class=foodTitle> Food Title: {{ recipe.Title }}</h2>
             <h3 class=foodDes> Ingredients: {{ recipe.Ingredients }}</h3>
             <h3 class=foodDes> Description: {{ recipe.Description }}</h3>
-            <h3 class=foodDes> Submitted on {{ recipe.Time }}</h3>
+            <h3 class=foodDes> Submitted on <script> document.write(new Date().toLocaleDateString());</script></h3>
             <br>
         {% endfor %}
       </center>

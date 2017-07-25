@@ -1,6 +1,5 @@
 import jinja2
 import webapp2
-import time
 from google.appengine.ext import ndb
 from google.appengine.api import users
 
@@ -60,20 +59,17 @@ class ConfirmationPage(webapp2.RequestHandler):
 
     def post(self):
         gmail_login(self)
-        localtime = time.localtime(time.time())
         template = env.get_template('templates/recipes.html')
         self.response.write(
             template.render({
             'Title':self.request.get('Title'),
             'Ingredients': self.request.get('Ingredients'),
-            'Description':self.request.get('Description'),
-            'Time':self.request.get('localtime')
+            'Description':self.request.get('Description')
             }))
         recipe = Recipe( #putting parameters in recipe object
             Title=self.request.get('Title'),
             Ingredients=self.request.get('Ingredients'),
-            Description=self.request.get('Description'),
-            Time=self.request.get('localtime')
+            Description=self.request.get('Description')
          )
         recipe.put() #this lets you store event into datastore
 
@@ -82,7 +78,6 @@ class Recipe(ndb.Model): #this is the recipe
     Title = ndb.StringProperty()
     Ingredients = ndb.StringProperty()
     Description = ndb.StringProperty()
-    Time = ndb.StringProperty()
 
 # It outputs all the recipes that have been stored in the data store.
 class UserDatabase(webapp2.RequestHandler):
@@ -90,7 +85,6 @@ class UserDatabase(webapp2.RequestHandler):
         gmail_login(self)
         #This code is for recipes to display after confirmation page
         query = Recipe.query()
-        query = query.order(Recipe.Title)
         recipes = query.fetch() #now a list of recipe objects
         template = env.get_template('templates/database.html')
         self.response.write(
