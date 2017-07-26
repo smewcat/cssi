@@ -54,7 +54,7 @@ class SearchResults(webapp2.RequestHandler):
 class RecipeIngredient(ndb.Model):
     name = ndb.StringProperty()
 
-# This is creates an object of recipe input
+# This creates an object of recipe input
 class Recipe(ndb.Model): #this is the recipe
     Title = ndb.StringProperty()
     Ingredients = ndb.StructuredProperty(RecipeIngredient, repeated=True)   # This is a class within a class
@@ -122,9 +122,10 @@ class CakePageHandler(webapp2.RequestHandler):
 
 # This handler will create a template for the different recipes. It displays the
 # name of the recipe, the ingredients, and the procedures.
+
 class FoodResultsPageHandler(webapp2.RequestHandler):
     def get(self):
-        template = env.get_template('templates/recipetemplate.html')   #Need to change the name for the HTML file
+        template = env.get_template('templates/recipetemplate.html')
         page_stuff = {
         'recipe_name' : self.request.get('recipe_name'),
         'ingredients' : self.request.get('ingredients'),
@@ -143,13 +144,6 @@ class UserRecipePage(webapp2.RequestHandler):
         gmail_login(self)
         template = env.get_template('templates/recipetemplate.html')
         self.response.write(template.render())
-
-# # This handler will store the comments and recipes inputted by the users in the datastore
-# class RecipePageTemplate(ndb.Model):
-#     # NEED TO ADD A WAY TO ACCESS PICTURES FROM THE DATASTORE
-#     recipe_name = ndb.StringProperty()
-#     ingredients = ndb.StringProperty()
-#     procedure = ndb.StringProperty()
 
 
 app = webapp2.WSGIApplication([
