@@ -71,7 +71,8 @@ class ConfirmationPage(webapp2.RequestHandler):
             Title=self.request.get('Title'),
             Ingredients=self.request.get('Ingredients'),
             Description=self.request.get('Description'),
-            Date=datetime.date.today()
+            Date=datetime.date.today(),
+            pic=self.request.get('pic')
          )
         recipe.put() #this lets you store event into datastore
 
@@ -81,6 +82,7 @@ class Recipe(ndb.Model): #this is the recipe
     Ingredients = ndb.StringProperty()
     Description = ndb.StringProperty()
     Date = ndb.DateProperty()
+    pic = ndb.GenericProperty()
 
 # It outputs all the recipes that have been stored in the data store.
 class UserDatabase(webapp2.RequestHandler):

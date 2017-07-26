@@ -41,6 +41,7 @@ body {background-image: url("back.jpg");}
 .ingredienttexBox {
   width: 500px;
   height: 250px;
+  box-sizing: border-box;
   border: 5px solid #3E5655;
   font-size: 15pt;
   font-family: "Coming Soon";
@@ -67,8 +68,10 @@ body {background-image: url("back.jpg");}
 .inputButton:hover {
     background-color: #293939;
     color: white;
-    cursor: pointer;;
+    cursor: pointer;
 }
+
+
 
 
 
@@ -211,6 +214,8 @@ ul{
   font-family: "Coming Soon";
   font-size: 14pt;
 }
+
+
 
 
 
