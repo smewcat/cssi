@@ -50,7 +50,7 @@ class SearchResults(webapp2.RequestHandler):
         template = env.get_template('templates/results.html')
         self.response.write(template.render({'recipes' : recipes }))
 
-# This class was created to help the search algorithm understand itself better. 
+# This class was created to help the search algorithm understand itself better.
 class RecipeIngredient(ndb.Model):
     name = ndb.StringProperty()
 
@@ -93,11 +93,10 @@ class ConfirmationPage(webapp2.RequestHandler):
             Title=self.request.get('Title'),
             Ingredients = ingredients_list,
             Description=self.request.get('Description'),
-            Date=datetime.date.today()
+            Date=datetime.date.today(),
+            pic=self.request.get('pic')
          )
         recipe.put() #this lets you store event into datastore
-
-
 
 # It outputs all the recipes that have been stored in the data store.
 class UserDatabase(webapp2.RequestHandler):
