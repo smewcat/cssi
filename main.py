@@ -77,7 +77,6 @@ class ConfirmationPage(webapp2.RequestHandler):
             'Title':self.request.get('Title'),
             'Ingredients': self.request.get('Ingredients'),
             'Description':self.request.get('Description'),
-            'pic':self.request.get('pic'),
             }))
         ingredients_string = self.request.get('Ingredients').replace(" ", "").split(",")
         ingredients_list = []
@@ -89,7 +88,7 @@ class ConfirmationPage(webapp2.RequestHandler):
             Ingredients = ingredients_list,
             Description=self.request.get('Description'),
             Date=datetime.date.today(),
-            #pic=self.request.get('pic')
+            pic=str(self.request.get('pic'))
          )
         recipe.put() #this lets you store event into datastore
 
