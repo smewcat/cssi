@@ -370,9 +370,9 @@ class Soup(webapp2.RequestHandler):
         {'ing': 'salt and pepper to taste'},
         {'ing': '1 teaspoon chicken bouillon granules (optional)'}]
 
-        images = [{'img': 'resources/pchicken1.jpg'},
-        {'img': 'resources/pchicken2.jpg'},
-        {'img': 'resources/pchicken3.jpg'}]
+        images = [{'img': 'resources/cs1.jpg'},
+        {'img': 'resources/cs2.jpg'},
+        {'img': 'resources/cs3.jpg'}]
 
         recipes = [{'recipe_step': 'Put the chicken, carrots, celery and onion in a large soup pot and cover with cold water.'},
         {'recipe_step': 'Heat and simmer, uncovered, until the chicken meat falls off of the bones (skim off foam every so often).'},
