@@ -60,6 +60,7 @@ class Recipe(ndb.Model): #this is the recipe
     Ingredients = ndb.StructuredProperty(RecipeIngredient, repeated=True)   # This is a class within a class
     Description = ndb.StringProperty()
     Date = ndb.DateProperty()
+    pic = ndb.BlobProperty()
 
 #This is the handler for the recipeinput
 class RecipeInput(webapp2.RequestHandler):
@@ -94,7 +95,7 @@ class ConfirmationPage(webapp2.RequestHandler):
             Ingredients = ingredients_list,
             Description=self.request.get('Description'),
             Date=datetime.date.today(),
-            pic=self.request.get('pic')
+            #pic=self.request.get('pic')
          )
         recipe.put() #this lets you store event into datastore
 
