@@ -4,14 +4,6 @@ import datetime
 from google.appengine.ext import ndb
 from google.appengine.api import users
 
-INGREDIENT_TO_RECIPES = {
-    "eggs" : ["cake", "hard-boiled egg", "ultimate breakfast", "sunny-side up", "deviled eggs"],
-    "milk" : ["milkshake", "waffles/pancake", "cereal", "cheese"],
-    "lettuce" : ["salad", "taco", "burger"],
-    "bread" : ["peanut butter & jelly sandwich", "sub", "pizza", "bagels", "sandwiches"],
-    "chicken" : ["Roast Chicken", "Chicken Soup", "BBQ"],
-}
-
 #from google.appengine.api import users - for Gmail login
 env=jinja2.Environment(loader=jinja2.FileSystemLoader(''))
 
