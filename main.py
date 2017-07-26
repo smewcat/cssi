@@ -4,10 +4,6 @@ import datetime
 from google.appengine.ext import ndb
 from google.appengine.api import users
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 7aa7385295ce0d83f8acfd1588b1b29d24f2b483
 #from google.appengine.api import users - for Gmail login
 env=jinja2.Environment(loader=jinja2.FileSystemLoader(''))
 

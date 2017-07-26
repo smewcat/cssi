@@ -31,7 +31,7 @@
     <h1 class="subtitle" id="results"> Results </h1>
 
     {% for recipe in recipes %}
-        <h2 class=foodTitle> Food Title: {{ recipe.Title }}</h2>
+        <h2 class=foodTitle> {{ recipe.Title }}</h2>
         <h3 class=foodDes> Submitted on {{ recipe.Date }}</h3>
         <br>
     {% endfor %}
