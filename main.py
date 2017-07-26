@@ -4,6 +4,10 @@ import datetime
 from google.appengine.ext import ndb
 from google.appengine.api import users
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7aa7385295ce0d83f8acfd1588b1b29d24f2b483
 #from google.appengine.api import users - for Gmail login
 env=jinja2.Environment(loader=jinja2.FileSystemLoader(''))
 
@@ -75,7 +79,8 @@ class ConfirmationPage(webapp2.RequestHandler):
             template.render({
             'Title':self.request.get('Title'),
             'Ingredients': self.request.get('Ingredients'),
-            'Description':self.request.get('Description')
+            'Description':self.request.get('Description'),
+            'pic':self.request.get('pic'),
             }))
         ingredients_string = self.request.get('Ingredients').replace(" ", "").split(",")
         ingredients_list = []
@@ -100,18 +105,6 @@ class UserDatabase(webapp2.RequestHandler):
         query = Recipe.query(Recipe.Ingredients.name == self.request.get("search"))
         recipes = query.fetch() #now a list of recipe objects
         self.response.write(template.render({'recipes' : recipes}))
-
-class TacoPageHandler(webapp2.RequestHandler):
-    def get(self):
-        gmail_login(self)
-        template = env.get_template('templates/taco.html')
-        self.response.write(template.render())
-
-class CakePageHandler(webapp2.RequestHandler):
-    def get(self):
-        gmail_login(self)
-        template = env.get_template('templates/cake.html')
-        self.response.write(template.render())
 
 # This handler will create a template for the different recipes. It displays the
 # name of the recipe, the ingredients, and the procedures.
@@ -145,8 +138,6 @@ app = webapp2.WSGIApplication([
     ('/recipeinput', RecipeInput),
     ('/confirmation', ConfirmationPage),
     ('/database', UserDatabase),
-    ('/taco', TacoPageHandler),
-    ('/cake', CakePageHandler),
     ('/recipe', UserRecipePage),
     ('/food', FoodResultsPageHandler)
 ], debug=True)
