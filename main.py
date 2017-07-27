@@ -45,7 +45,7 @@ class SearchResults(webapp2.RequestHandler):
 # This is creates an object of recipe input
 class Recipe(ndb.Model): #this is the recipe
     Title = ndb.StringProperty()
-    Ingredients = ndb.StringProperty()   # This is a class within a class
+    Ingredients = ndb.StringProperty(repeated=True)   # This is a class within a class
     Description = ndb.StringProperty()
     Date = ndb.DateProperty()
     pic = ndb.BlobProperty()
@@ -75,21 +75,12 @@ class ConfirmationPage(webapp2.RequestHandler):
             }))
         recipe = Recipe( #putting parameters in recipe object
             Title=self.request.get('Title'), #.replace(" ","").lower() ,
-            Ingredients=self.request.get('Ingredients'),
+            Ingredients=self.request.get('Ingredients').split(", "),
             Description=self.request.get('Description'),
             Date=datetime.date.today(),
             pic=str(self.request.get('pic'))
          )
         recipe.put() #this lets you store event into datastore
-
-# This is creates an object of recipe input
-# class Recipe(ndb.Model): #this is the recipe
-#     Title = ndb.StringProperty()
-#     Ingredients = ndb.StringProperty()
-#     Description = ndb.StringProperty()
-#     Date = ndb.DateProperty()
-#     pic = ndb.BlobProperty()
-#     #ID = recipe.key.id()
 
 # It outputs all the recipes that have been stored in the data store.
 class UserDatabase(webapp2.RequestHandler):
