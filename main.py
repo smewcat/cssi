@@ -74,7 +74,7 @@ class ConfirmationPage(webapp2.RequestHandler):
             'Description':self.request.get('Description')
             }))
         recipe = Recipe( #putting parameters in recipe object
-            Title=self.request.get('Title'), #.replace(" ","").lower() ,
+            Title=self.request.get('Title'),
             Ingredients=self.request.get('Ingredients').split(", "),
             Description=self.request.get('Description'),
             Date=datetime.date.today(),
@@ -97,15 +97,19 @@ class UserDatabase(webapp2.RequestHandler):
 class UserDatabaseSearchResults(webapp2.RequestHandler):
     def get(self):
         gmail_login(self)
-        inputted_search = self.request.get("search") #.lower().replace(" ", "")
-        query = Recipe.query(Recipe.Title == inputted_search)
-        #recipeA = []
-        # for recipe_title in Recipe.query(Recipe.Title):
+        inputted_search = self.request.get("search").lower()
+        query = Recipe.query()
+        #query = Recipe.query(Recipe.Title == inputted_search)
+        recipeA = []
+        #for recipe_title in Recipe.query(Recipe.Title):
         #     if inputted_search in recipe_title:
         #         recipeA.append[recipe_title]
         recipes = query.fetch()         #now a list of recipe objects
+        for recipe in recipes:
+            if inputted_search in recipe.Title.lower():
+                recipeA.append(recipe)
         template = env.get_template('templates/database_search_results.html')
-        self.response.write(template.render({'recipes' : recipes }))
+        self.response.write(template.render({'recipes' : recipeA }))
 
 class Poach(webapp2.RequestHandler):
     def get(self):
