@@ -29,17 +29,17 @@
   <h1 class="foodTitle"> {{ recipe.Title }} </h1>
   <img src='/GetImage?recipe={{ recipe_id }}' class="foodImg"></img>
   </center>
+
   <br>
    <h2 class="foodSubtitle"> Ingredients </h2>
-
-   <ul>
-   {% for each_ingredient in ingredients %}
-       <li class="Ingredient"> Ingredient {{ recipe.ingredients }} </li>
+    {% set ingredients_list = recipe.Ingredients.split(", ") %}
+   {% for ingredient in ingredients_list %}
+     <ul>
+       <li class="Ingredient"> {{ ingredient }} </li>
+     </ul>
    {% endfor %}
-       </ul>
+
   <br><br>
   <h2 class="foodSubtitle"> Recipe </h2>
   <p class = "recipeStep"> {{ recipe.Description }} </p>
   </html>
-
- <!--goal: post the datastore specific to a key-->
