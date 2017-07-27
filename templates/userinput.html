@@ -30,14 +30,14 @@
 
     <br><br><br>
 
-      <form action="/confirmation" method="post">
+      <form action="/confirmation" method="post" enctype="multipart/form-data">
 
         <p class="ingredientInput">add the title of your recipe: </p> <br><br>
         <input type='text' name='Title' class='ingredientBox'></input>
         <br><br><br><br>
 
         <p class="ingredientInput">add a photo:</p> <br><br>
-        <input type='file' name='pic' accept="image/*" class='ingredientBox' id="choosefile"></input>
+        <input type='file' name='pic' accept="image/jpeg" class='ingredientBox' id="choosefile"></input>
         <br><br><br><br>
 
         <p class= "ingredientInput"> add your ingredients, with measurements. use commas

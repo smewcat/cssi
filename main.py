@@ -78,7 +78,7 @@ class ConfirmationPage(webapp2.RequestHandler):
             Ingredients=self.request.get('Ingredients').split(", "),
             Description=self.request.get('Description'),
             Date=datetime.date.today(),
-            pic=str(self.request.get('pic'))
+            pic=self.request.get('pic')
          )
         recipe.put() #this lets you store event into datastore
 
@@ -410,9 +410,17 @@ class UserRecipe(webapp2.RequestHandler):
     def get(self):
         gmail_login(self)
         recipe = Recipe.get_by_id(int(self.request.get('recipe')))
-        variables = {'recipe': recipe}
+        variables = {'recipe': recipe, 'recipe_id': self.request.get('recipe')}
         template = env.get_template('templates/userrecipe.html')
         self.response.write(template.render(variables))
+
+class GetImage(webapp2.RequestHandler):
+    def get(self):
+        recipe = Recipe.get_by_id(int(self.request.get('recipe')))
+        variables = {'recipe': recipe, 'recipe_id': self.request.get('recipe')}
+        self.response.headers["Content-Type"]="image/jpeg"
+        self.response.write(recipe.pic)
+
 
 app = webapp2.WSGIApplication([
     ('/', HomePage),
@@ -431,5 +439,6 @@ app = webapp2.WSGIApplication([
     ('/Caprese Chicken', Chicken),
     ('/Parmesan Garlic Chicken', GarlicChicken),
     ('/Chicken Soup', Soup),
-    ('/userrecipe', UserRecipe)
+    ('/userrecipe', UserRecipe),
+    ('/GetImage', GetImage)
 ], debug=True)

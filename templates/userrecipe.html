@@ -27,14 +27,13 @@
 
   <br>
   <h1 class="foodTitle"> {{ recipe.Title }} </h1>
-  <img src= '{{ pic }}' class="foodImg">
+  <img src='/GetImage?recipe={{ recipe_id }}' class="foodImg"></img>
   </center>
   <br>
    <h2 class="foodSubtitle"> Ingredients </h2>
 
    <ul>
    {% for each_ingredient in ingredients %}
-     {% set each_ingredient = ingredients.split(", ") %}
        <li class="Ingredient"> Ingredient {{ recipe.ingredients }} </li>
    {% endfor %}
        </ul>
