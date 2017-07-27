@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+      <title> Epicure </title>
+      <link rel="stylesheet" href="resources/finalapp.css">
+
+      <style>
+      @import url('https://fonts.googleapis.com/css?family=Amatica+SC');
+      @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
+      @import url('https://fonts.googleapis.com/css?family=Coming+Soon|Patrick+Hand');
+      @import url('https://fonts.googleapis.com/css?family=Julius+Sans+One');
+      </style>
+
+  </head>
+
+  <body>
+      <center>
+      <img src="resources/EPLogo.png" class="logo">
+      <br>
+
+      <h1 class="foodTitle"> {{ name }} </h1>
+
+      {% for image in images %}
+      <img src= {{ image.img }} class="foodImg">
+      {% endfor %}
+    </center>
+
+      <h2 class="foodSubtitle"> Ingredients </h2>
+      <ul>
+          {% for ingredient in ingredients %}
+          <li class="Ingredient"> {{ ingredient.ing }}</li>
+          {% endfor %}
+        </ul>
+
+        <br><br>
+
+        <h2 class="foodSubtitle"> Recipe </h2>
+        <ol>
+            {% for recipe in recipes %}
+            <li class="recipeStep"> {{ recipe.recipe_step }}</li>
+            {% endfor %}
+          </ul>
+
+          <br>
+
+        <h2 class="moreInfo"> More Info </h2>
+          <p class="closing"> This recipe is courtesy of
+            <a href= {{ link }} class="foodlink"> {{ linkName }} </a>. <br>
+              To search for another recipe, click
+                <a href='/' class='foodlink'> here </a>.
+              To add your own recipe, click
+                <a href='/recipeinput' class='foodlink'> here </a>.
+          </p>
+
+
+
+  </body>
+</html>
