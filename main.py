@@ -40,20 +40,15 @@ class SearchResults(webapp2.RequestHandler):
         inputted_ingredient = self.request.get("ingredient").lower()
         template = env.get_template('templates/results.html')
         results_params= { "recipes" : INGREDIENT_TO_RECIPES[inputted_ingredient]}
-        gmail_login(self)
         self.response.write(template.render(results_params))
-
-# This class was created to help the search algorithm understand itself better.
-class RecipeIngredient(ndb.Model):
-    name = ndb.StringProperty(repeated=True)
 
 # This is creates an object of recipe input
 class Recipe(ndb.Model): #this is the recipe
     Title = ndb.StringProperty()
-    Ingredients = ndb.StructuredProperty(RecipeIngredient)   # This is a class within a class
+    Ingredients = ndb.StringProperty()   # This is a class within a class
     Description = ndb.StringProperty()
     Date = ndb.DateProperty()
-
+    pic = ndb.BlobProperty()
 
 #This is the handler for the recipeinput
 class RecipeInput(webapp2.RequestHandler):
@@ -78,20 +73,23 @@ class ConfirmationPage(webapp2.RequestHandler):
             'Ingredients': self.request.get('Ingredients'),
             'Description':self.request.get('Description')
             }))
-        ingredients_string = self.request.get('Ingredients')
-        ingredients_list = []
-        for ingredient in ingredients_string:
-            new_recipe = RecipeIngredient(name=ingredient)
-            ingredients_list.append(new_recipe)
         recipe = Recipe( #putting parameters in recipe object
-            Title=self.request.get('Title'),
+            Title=self.request.get('Title'), #.replace(" ","").lower() ,
             Ingredients=self.request.get('Ingredients'),
             Description=self.request.get('Description'),
             Date=datetime.date.today(),
-            #pic=self.request.get('pic')
-            pic=str(self.request.get('pic')),
+            pic=str(self.request.get('pic'))
          )
         recipe.put() #this lets you store event into datastore
+
+# This is creates an object of recipe input
+# class Recipe(ndb.Model): #this is the recipe
+#     Title = ndb.StringProperty()
+#     Ingredients = ndb.StringProperty()
+#     Description = ndb.StringProperty()
+#     Date = ndb.DateProperty()
+#     pic = ndb.BlobProperty()
+#     #ID = recipe.key.id()
 
 # It outputs all the recipes that have been stored in the data store.
 class UserDatabase(webapp2.RequestHandler):
@@ -110,6 +108,10 @@ class UserDatabaseSearchResults(webapp2.RequestHandler):
         gmail_login(self)
         inputted_search = self.request.get("search") #.lower().replace(" ", "")
         query = Recipe.query(Recipe.Title == inputted_search)
+        #recipeA = []
+        # for recipe_title in Recipe.query(Recipe.Title):
+        #     if inputted_search in recipe_title:
+        #         recipeA.append[recipe_title]
         recipes = query.fetch()         #now a list of recipe objects
         template = env.get_template('templates/database_search_results.html')
         self.response.write(template.render({'recipes' : recipes }))
@@ -413,7 +415,7 @@ class UserRecipe(webapp2.RequestHandler):
     def get(self):
         gmail_login(self)
         recipe = Recipe.get_by_id(int(self.request.get('recipe')))
-        variables = {'recipe':recipe}
+        variables = {'recipe': recipe}
         template = env.get_template('templates/userrecipe.html')
         self.response.write(template.render(variables))
 
