@@ -36,7 +36,6 @@ class HomePage(webapp2.RequestHandler):
 # This handler will display the search results from the user's input.
 class SearchResults(webapp2.RequestHandler):
     def get(self):
-<<<<<<< HEAD
         gmail_login(self)
         inputted_ingredient = self.request.get("ingredient").lower().replace(" ", "")
         print inputted_ingredient
