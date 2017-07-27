@@ -46,18 +46,18 @@ class SearchResults(webapp2.RequestHandler):
         print inputted_ingredient
         query = Recipe.query(Recipe.Ingredients.name == inputted_ingredient)
         recipes = query.fetch()         #now a list of recipe objects
-        print recipes
+        #print Recipe.Ingredients.name
         template = env.get_template('templates/results.html')
         self.response.write(template.render({'recipes' : recipes }))
 
 # This class was created to help the search algorithm understand itself better.
 class RecipeIngredient(ndb.Model):
-    name = ndb.StringProperty()
+    name = ndb.StringProperty(repeated=True)
 
 # This is creates an object of recipe input
 class Recipe(ndb.Model): #this is the recipe
     Title = ndb.StringProperty()
-    Ingredients = ndb.StructuredProperty(RecipeIngredient, repeated=True)   # This is a class within a class
+    Ingredients = ndb.StructuredProperty(RecipeIngredient)   # This is a class within a class
     Description = ndb.StringProperty()
     Date = ndb.DateProperty()
 
@@ -84,7 +84,7 @@ class ConfirmationPage(webapp2.RequestHandler):
             'Ingredients': self.request.get('Ingredients'),
             'Description':self.request.get('Description')
             }))
-        ingredients_string = self.request.get('Ingredients').replace(" ", "").split(",")
+        ingredients_string = self.request.get('Ingredients')
         ingredients_list = []
         for ingredient in ingredients_string:
             new_recipe = RecipeIngredient(name=ingredient)
@@ -94,7 +94,7 @@ class ConfirmationPage(webapp2.RequestHandler):
             Ingredients = ingredients_list,
             Description=self.request.get('Description'),
             Date=datetime.date.today(),
-            pic=self.request.get('pic')
+            #pic=self.request.get('pic')
          )
         recipe.put() #this lets you store event into datastore
 
