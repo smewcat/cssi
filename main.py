@@ -53,6 +53,7 @@ class Recipe(ndb.Model): #this is the recipe
     Ingredients = ndb.StructuredProperty(RecipeIngredient)   # This is a class within a class
     Description = ndb.StringProperty()
     Date = ndb.DateProperty()
+    pic = ndb.BlobProperty()
 
 
 #This is the handler for the recipeinput
