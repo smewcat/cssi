@@ -45,7 +45,7 @@ class SearchResults(webapp2.RequestHandler):
 # This is creates an object of recipe input
 class Recipe(ndb.Model): #this is the recipe
     Title = ndb.StringProperty()
-    Ingredients = ndb.StringProperty(repeated=True)   # This is a class within a class
+    Ingredients = ndb.StringProperty()   # This is a class within a class
     Description = ndb.StringProperty()
     Date = ndb.DateProperty()
     pic = ndb.BlobProperty()
@@ -75,7 +75,7 @@ class ConfirmationPage(webapp2.RequestHandler):
             }))
         recipe = Recipe( #putting parameters in recipe object
             Title=self.request.get('Title'),
-            Ingredients=self.request.get('Ingredients').split(", "),
+            Ingredients=self.request.get('Ingredients'),
             Description=self.request.get('Description'),
             Date=datetime.date.today(),
             pic=str(self.request.get('pic'))
