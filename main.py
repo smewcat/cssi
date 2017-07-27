@@ -56,13 +56,11 @@ class Recipe(ndb.Model): #this is the recipe
     Ingredients = ndb.StructuredProperty(RecipeIngredient)   # This is a class within a class
     Description = ndb.StringProperty()
     Date = ndb.DateProperty()
-=======
         inputted_ingredient = self.request.get("ingredient").lower()
         template = env.get_template('templates/results.html')
         results_params= { "recipes" : INGREDIENT_TO_RECIPES[inputted_ingredient]}
         gmail_login(self)
         self.response.write(template.render(results_params))
->>>>>>> df8aaf59af84ec55093f46798211221968a2131d
 
 #This is the handler for the recipeinput
 class RecipeInput(webapp2.RequestHandler):
@@ -87,25 +85,17 @@ class ConfirmationPage(webapp2.RequestHandler):
             'Ingredients': self.request.get('Ingredients'),
             'Description':self.request.get('Description'),
             }))
-<<<<<<< HEAD
         ingredients_string = self.request.get('Ingredients')
         ingredients_list = []
         for ingredient in ingredients_string:
             new_recipe = RecipeIngredient(name=ingredient)
             ingredients_list.append(new_recipe)
-=======
->>>>>>> df8aaf59af84ec55093f46798211221968a2131d
         recipe = Recipe( #putting parameters in recipe object
             Title=self.request.get('Title'),
             Ingredients=self.request.get('Ingredients'),
             Description=self.request.get('Description'),
             Date=datetime.date.today(),
-<<<<<<< HEAD
-            #pic=self.request.get('pic')
-=======
             pic=str(self.request.get('pic'))
->>>>>>> df8aaf59af84ec55093f46798211221968a2131d
-         )
         recipe.put() #this lets you store event into datastore
 
 # This is creates an object of recipe input
