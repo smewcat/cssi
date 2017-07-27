@@ -1,6 +1,7 @@
 import jinja2
 import webapp2
 import datetime
+from google.appengine.ext import db
 from google.appengine.ext import ndb
 from google.appengine.api import users
 
@@ -36,7 +37,6 @@ class HomePage(webapp2.RequestHandler):
 # This handler will display the search results from the user's input.
 class SearchResults(webapp2.RequestHandler):
     def get(self):
-<<<<<<< HEAD
         gmail_login(self)
         inputted_ingredient = self.request.get("ingredient").lower().replace(" ", "")
         print inputted_ingredient
@@ -48,21 +48,19 @@ class SearchResults(webapp2.RequestHandler):
 
 # This class was created to help the search algorithm understand itself better.
 class RecipeIngredient(ndb.Model):
-    name = ndb.StringProperty(repeated=True)
+    name = db.StringProperty(repeated=True)
 
 # This is creates an object of recipe input
 class Recipe(ndb.Model): #this is the recipe
-    Title = ndb.StringProperty()
-    Ingredients = ndb.StructuredProperty(RecipeIngredient)   # This is a class within a class
-    Description = ndb.StringProperty()
-    Date = ndb.DateProperty()
-=======
+    Title = db.StringProperty()
+    Ingredients = db.StructuredProperty(RecipeIngredient)   # This is a class within a class
+    Description = db.StringProperty()
+    Date = db.DateProperty()
         inputted_ingredient = self.request.get("ingredient").lower()
         template = env.get_template('templates/results.html')
         results_params= { "recipes" : INGREDIENT_TO_RECIPES[inputted_ingredient]}
         gmail_login(self)
         self.response.write(template.render(results_params))
->>>>>>> df8aaf59af84ec55093f46798211221968a2131d
 
 #This is the handler for the recipeinput
 class RecipeInput(webapp2.RequestHandler):
@@ -87,42 +85,28 @@ class ConfirmationPage(webapp2.RequestHandler):
             'Ingredients': self.request.get('Ingredients'),
             'Description':self.request.get('Description'),
             }))
-<<<<<<< HEAD
         ingredients_string = self.request.get('Ingredients')
         ingredients_list = []
         for ingredient in ingredients_string:
             new_recipe = RecipeIngredient(name=ingredient)
             ingredients_list.append(new_recipe)
-=======
->>>>>>> df8aaf59af84ec55093f46798211221968a2131d
         recipe = Recipe( #putting parameters in recipe object
             Title=self.request.get('Title'),
             Ingredients=self.request.get('Ingredients'),
             Description=self.request.get('Description'),
             Date=datetime.date.today(),
-<<<<<<< HEAD
             #pic=self.request.get('pic')
-=======
             pic=str(self.request.get('pic'))
->>>>>>> df8aaf59af84ec55093f46798211221968a2131d
          )
         recipe.put() #this lets you store event into datastore
-
-# This is creates an object of recipe input
-class Recipe(ndb.Model): #this is the recipe
-    Title = ndb.StringProperty()
-    Ingredients = ndb.StringProperty()
-    Description = ndb.StringProperty()
-    Date = ndb.DateProperty()
-    pic = ndb.BlobProperty()
 
 # It outputs all the recipes that have been stored in the data store.
 class UserDatabase(webapp2.RequestHandler):
     def get(self):
         gmail_login(self)
         #This code is for recipes to display after confirmation page
-        query = Recipe.query()
-        recipes = query.fetch() #now a list of recipe objects
+        query = db.Query(Recipe)
+        recipes = query.fetch(limit=100) #now a list of recipe objects
         template = env.get_template('templates/database.html')
         self.response.write(
         template.render({'recipes' : recipes}))
@@ -422,6 +406,14 @@ class Soup(webapp2.RequestHandler):
         variables = {'name': name, 'ingredients':ingredients, 'recipes': recipes, 'link':link, 'images': images, 'linkName':linkName}
         self.response.write(template.render(variables))
 
+class UserRecipe(webapp2.RequestHandler):
+    def get(self):
+        gmail_login(self)
+        posts = db.GqlQuery("SELECT * FROM Recipe LIMIT 2")
+        posts_dic = {'posts':posts}
+        template = env.get_template('templates/userrecipe.html')
+        self.response.write(template.render(**posts_dic))
+
 app = webapp2.WSGIApplication([
     ('/', HomePage),
     ('/results', SearchResults),
@@ -436,5 +428,6 @@ app = webapp2.WSGIApplication([
     ('/cake', Cake), #DONE
     ('/Caprese Chicken', Chicken),
     ('/Parmesan Garlic Chicken', GarlicChicken),
-    ('/Chicken Soup', Soup)
+    ('/Chicken Soup', Soup),
+    ('/userrecipe', UserRecipe)
 ], debug=True)
