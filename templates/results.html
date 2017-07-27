@@ -22,21 +22,22 @@
       <img src="resources/EPLogo.png" class="logo">
       <br><b><br>
 
-      <div class="navMenu">
-        <a href='/' class="navOption"> Recipe Search </a>
-        <a href='/recipeinput' class="navOption"> Submit a Recipe </a>
-        <a href='/database' class="navOption"> User Database </a>
-      </div>
+        <div class="navMenu">
+          <a href='/' class="navOption"> Search by Ingredient</a>
+          <a href='/database' class="navOption"> Search by Recipe Title</a>
+          <a href='/recipeinput' class="navOption"> Submit a Recipe </a>
+        </div>
 
 
     <h1 class="subtitle" id="results"> Results </h1>
 
-    {% for recipe in recipes %}
-        <h2 class=foodTitle> Food Title: {{ recipe.Title }}</h2>
-        <h3 class=foodDes> Submitted on {{ recipe.Date }}</h3>
-        <br>
-    {% endfor %}
-
+<!--NEEDS TO BE FIXED-->
+{% for item in recipes %}
+<h3>
+  <a href='/{{ item }}' > {{ item }} </a>
+</h3>
+<br>
+{% endfor %}
 
 <br><br>
 
