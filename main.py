@@ -47,7 +47,7 @@ class Recipe(ndb.Model): #this is the recipe
     Title = ndb.StringProperty()
     Ingredients = ndb.StringProperty()   # This is a class within a class
     Description = ndb.StringProperty()
-    Date = ndb.DateProperty()
+    Date = ndb.DateTimeProperty()
     pic = ndb.BlobProperty()
 
 #This is the handler for the recipeinput
@@ -77,7 +77,7 @@ class ConfirmationPage(webapp2.RequestHandler):
             Title=self.request.get('Title'),
             Ingredients=self.request.get('Ingredients'),
             Description=self.request.get('Description'),
-            Date=datetime.date.today(),
+            Date=datetime.datetime.now(),
             pic=self.request.get('pic')
          )
         recipe.put() #this lets you store event into datastore
@@ -88,6 +88,7 @@ class UserDatabase(webapp2.RequestHandler):
         gmail_login(self)
         #This code is for recipes to display after confirmation page
         query = Recipe.query()
+        query = query.order(-Recipe.Date)
         recipes = query.fetch() #now a list of recipe objects
         template = env.get_template('templates/database.html')
         self.response.write(
