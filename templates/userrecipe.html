@@ -1,12 +1,36 @@
 <!DOCTYPE html>
 
 <html>
-<br>
-Recipe Title: {{ recipe.Title }}
-<br>
-Ingredients: {{ recipe.Ingredients }}
-<br>
-Description: {{ recipe.Description }}
-</html>
+  <head>
+    <title> Epicure </title>
+    <link rel="stylesheet" href="resources/finalapp.css">
+
+    <style>
+    @import url('https://fonts.googleapis.com/css?family=Amatica+SC');
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
+    @import url('https://fonts.googleapis.com/css?family=Coming+Soon|Patrick+Hand');
+    @import url('https://fonts.googleapis.com/css?family=Julius+Sans+One');
+    </style>
+
+</head>
+
+<body>
+    <center>
+    <img src="resources/EPLogo.png" class="logo">
+    <br><br><b>
+
+    <div class="navMenu">
+      <a href='/' class="navOption"> Recipe Search </a>
+      <a href='/recipeinput' class="navOption"> Submit a Recipe </a>
+      <a href='/database' class="navOption"> User Database </a>
+    </div>
+
+  <br>
+  Recipe Title: {{ recipe.Title }}
+  <br>
+  Ingredients: {{ recipe.Ingredients }}
+  <br>
+  Description: {{ recipe.Description }}
+  </html>
 
  <!--goal: post the datastore specific to a key-->

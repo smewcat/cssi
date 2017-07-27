@@ -53,15 +53,8 @@ class Recipe(ndb.Model): #this is the recipe
     Ingredients = ndb.StructuredProperty(RecipeIngredient)   # This is a class within a class
     Description = ndb.StringProperty()
     Date = ndb.DateProperty()
-        inputted_ingredient = self.request.get("ingredient").lower()
-        template = env.get_template('templates/results.html')
-        results_params= { "recipes" : INGREDIENT_TO_RECIPES[inputted_ingredient]}
-        gmail_login(self)
-        self.response.write(template.render(results_params))
-    Title = ndb.StringProperty()
-    Ingredients = ndb.StructuredProperty(RecipeIngredient)   # This is a class within a class
-    Description = ndb.StringProperty()
-    Date = ndb.DateProperty()
+
+
 #This is the handler for the recipeinput
 class RecipeInput(webapp2.RequestHandler):
     def get(self):
@@ -96,8 +89,7 @@ class ConfirmationPage(webapp2.RequestHandler):
             Description=self.request.get('Description'),
             Date=datetime.date.today(),
             #pic=self.request.get('pic')
-            pic=str(self.request.get('pic'))
-            Date=datetime.date.today()
+            pic=str(self.request.get('pic')),
          )
         recipe.put() #this lets you store event into datastore
 
@@ -424,7 +416,7 @@ class UserRecipe(webapp2.RequestHandler):
         variables = {'recipe':recipe}
         template = env.get_template('templates/userrecipe.html')
         self.response.write(template.render(variables))
-        
+
 app = webapp2.WSGIApplication([
     ('/', HomePage),
     ('/results', SearchResults),
