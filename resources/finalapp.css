@@ -164,6 +164,10 @@ ul{
     font-size: 14pt;
   }
 
+  .needcolumn {
+    column-count: 2;
+  }
+
 .recipeStep {
   font-family: "Coming Soon";
   margin-left: 45px;
