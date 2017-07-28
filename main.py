@@ -37,7 +37,7 @@ class HomePage(webapp2.RequestHandler):
 class SearchResults(webapp2.RequestHandler):
     def get(self):
         gmail_login(self)
-        inputted_ingredient = self.request.get("ingredient").lower()
+        inputted_ingredient = self.request.get("search").lower()
         template = env.get_template('templates/results.html')
         results_params= { "recipes" : INGREDIENT_TO_RECIPES[inputted_ingredient]}
         self.response.write(template.render(results_params))
